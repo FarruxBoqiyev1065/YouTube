@@ -1,5 +1,6 @@
 package dasturlash.uz.entity;
 
+import dasturlash.uz.enums.PlaylistStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,10 +19,10 @@ public class PlaylistEntity {
     @JoinColumn(name = "channel_id", nullable = false)
     private ChannelEntity channel;
 
-    @Column(nullable = false, length = 150)
+    @Column(name = "name", nullable = false, length = 150)
     private String name;
 
-    @Column(columnDefinition = "TEXT")
+    @Column(name = "description", columnDefinition = "TEXT")
     private String description;
 
     @Enumerated(EnumType.STRING)
