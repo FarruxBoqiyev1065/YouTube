@@ -16,14 +16,14 @@ public class EmailHistoryEntity {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
-    @Column(name = "to_email")
-    private String toEmail;
+    @Column(name = "to_account")
+    private String toAccount;
 
-    @Column(name = "title", columnDefinition = "text")
-    private String title;
+    @Column(name = "body", columnDefinition = "text")
+    private String body;
 
-    @Column(name = "message")
-    private String message;
+    @Column(name = "code")
+    private Integer code;
 
     @Column(name = "created_date")
     @CreationTimestamp
