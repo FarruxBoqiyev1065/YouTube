@@ -126,7 +126,7 @@ public class ProfileService {
     public PageImpl<ProfileDTO> filter(ProfileFilterDTO filterDTO, int page, int size) {
         FilterResultDTO<Object[]> result = profileCustomRepository.filter(filterDTO, page, size);
         List<ProfileDTO> profileDTOList = new LinkedList<>();
-        result.getContent().forEach(entity -> profileDTOList.add(toDTO(Pentity)));
+        result.getContent().forEach(entity -> profileDTOList.add(toDTO(entity)));
         return new PageImpl<>(profileDTOList, PageRequest.of(page, size), result.getTotal());
     }
 
