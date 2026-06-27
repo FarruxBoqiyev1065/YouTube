@@ -3,10 +3,12 @@ package dasturlash.uz.service;
 import dasturlash.uz.dto.FilterResultDTO;
 import dasturlash.uz.dto.profile.*;
 import dasturlash.uz.entity.ProfileEntity;
+import dasturlash.uz.enums.ProfileRole;
 import dasturlash.uz.enums.ProfileStatus;
 import dasturlash.uz.exceptions.AppBadException;
 import dasturlash.uz.repository.ProfileCustomRepository;
 import dasturlash.uz.repository.ProfileRepository;
+import dasturlash.uz.util.MapperUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -140,19 +142,25 @@ public class ProfileService {
         return dto;
     }
 
-//    public ProfileDTO toDTO(Object[] mapper) {
-//        ProfileDTO dto = new ProfileDTO();
-//        dto.setId((Integer) mapper[0]);
-//        dto.setName((String) mapper[1]);
-//        dto.setSurname((String) mapper[2]);
-//        dto.setUsername((String) mapper[3]);
-//        if (mapper[4] != null) {
-//            dto.setStatus(ProfileStatus.valueOf((String) mapper[4]));
-//        }
-//        dto.setCreatedDate(MapperUtil.localDateTime(mapper[5]));
-//        dto.setRoleList(ProfileRole.values((String[]) mapper[6]));
-//        return dto;
-//    }
+    public ProfileDTO toDTO(Object[] mapper) {
+        ProfileDTO dto = new ProfileDTO();
+        dto.setId((Integer) mapper[0]);
+        dto.setName((String) mapper[1]);
+        dto.setSurname((String) mapper[2]);
+        dto.setUsername((String) mapper[3]);
+        if (mapper[4] != null) {
+            dto.setStatus(ProfileStatus.valueOf((String) mapper[4]));
+        }
+        dto.setCreatedDate(MapperUtil.localDateTime(mapper[5]));
+        if (mapper[6] != null) {
+            List<ProfileRole> roleList = new LinkedList<>();
+            for (Object o : (Object[]) mapper[6]) {
+                roleList.add(ProfileRole.valueOf(o.toString()));
+            }
+            dto.setRoleList(roleList); // ['ADMIN', 'USER'] Object[]
+        }
+        return dto;
+    }
 
     public ProfileEntity get(Integer id) {
         return profileRepository.findByIdAndVisibleIsTrue(id).orElseThrow(() -> {

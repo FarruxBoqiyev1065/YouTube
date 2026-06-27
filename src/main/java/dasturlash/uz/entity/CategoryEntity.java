@@ -19,6 +19,9 @@ public class CategoryEntity {
     @Column( name = "name", nullable = false, unique = true, length = 100)
     private String name;
 
+    @Column(name = "category_key")
+    private String categoryKey;
+
     @Column(name = "created_date", nullable = false, updatable = false)
     private LocalDateTime createdDate;
 }
