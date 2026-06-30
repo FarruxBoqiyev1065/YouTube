@@ -1,33 +1,40 @@
 package dasturlash.uz.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 
-import java.util.UUID;
+import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "attaches")
+@Table(name = "attach")
 @Getter
 @Setter
 public class AttachEntity {
-
     @Id
-    @GeneratedValue
-    private UUID id;
+    private String id;
 
-    @Column(name = "origin_name", nullable = false)
-    private String originName;
+    @Column(name = "path")
+    private String path;
 
-    @Column(name = "size", nullable = false)
-    private Long size; // Fayl hajmi (byte)
+    @Column(name = "extension")
+    private String extension;
 
-    @Column(name = "type", nullable = false)
-    private String type; // mp4, jpg, png, pdf ...
+    @Column(name = "origen_name")
+    private String origenName;
 
-    @Column(name = "path", nullable = false)
-    private String path; // Fayl saqlangan yo'l
+    @Column(name = "size")
+    private Long size;
 
-    @Column(name = "duration")
-    private Long duration; // Video yoki audio davomiyligi (sekund)
+    @Column(name = "created_date")
+    @CreationTimestamp
+    private LocalDateTime createdDate;
+
+    @Column(name = "visible")
+    private Boolean visible = true;
 }
+
